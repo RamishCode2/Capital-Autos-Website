@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">
+        {{ brand.name }}
+    </h2>
+
+    <div class="row">
+
+        {% for model in car_models %}
+
+        <div class="col-md-4 mb-3">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body">
+
+                    <h5>{{ model.name }}</h5>
+
+<a href="{% url 'product_list' model.id %}"
+   class="btn btn-primary mt-2">
+   View Products
+</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <p>No car models available.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <div class="col-md-5">
+            {% if product.image %}
+                <img src="{{ product.image.url }}"
+                     class="img-fluid rounded">
+            {% endif %}
+        </div>
+
+        <div class="col-md-7">
+
+            <h2>{{ product.name }}</h2>
+
+            <h3 class="text-success">
+                Rs. {{ product.price }}
+            </h3>
+
+            <p>{{ product.description }}</p>
+
+            <p>
+                <strong>Brand:</strong>
+                {{ product.brand.name }}
+            </p>
+
+            <p>
+                <strong>Model:</strong>
+                {{ product.car_model.name }}
+            </p>
+
+            <p>
+                <strong>Category:</strong>
+                {{ product.category.name }}
+            </p>
+
+            <button class="btn btn-warning">
+                Add to Cart
+            </button>
+
+            <button class="btn btn-success">
+                Buy Now
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

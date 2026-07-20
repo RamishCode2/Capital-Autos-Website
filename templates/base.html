@@ -1,6 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Capital Autos</title>
@@ -10,10 +19,47 @@
 
 <body>
 
-<nav class="navbar navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="/">Capital Autos</a>
-    </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+<div class="container">
+
+<a class="navbar-brand fw-bold" href="/">
+🚗 Capital Autos
+</a>
+
+<form class="d-flex">
+
+<input class="form-control me-2"
+placeholder="Search Products">
+
+<button class="btn btn-warning">
+
+<i class="bi bi-search"></i>
+
+</button>
+
+</form>
+
+<div>
+
+<a class="btn btn-outline-light">
+
+<i class="bi bi-person"></i>
+
+</a>
+
+<a class="btn btn-warning">
+
+<i class="bi bi-cart"></i>
+
+0
+
+</a>
+
+</div>
+
+</div>
+
 </nav>
 
 {% block content %}

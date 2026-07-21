@@ -14,4 +14,4 @@ def home(request):
         "featured_products": featured_products,
     }
 
-    return render(request, "home.html", context)
+    return render(request, "core/home.html", context)

@@ -66,5 +66,84 @@ Shop Now
     </div>
 
 </div>
+<hr class="my-5">
+
+<div class="container">
+
+    <h2 class="text-center mb-4">Popular Categories</h2>
+
+    <div class="row">
+
+        {% for category in categories %}
+
+        <div class="col-md-3 col-6 mb-4">
+
+            <div class="card shadow-sm text-center h-100">
+
+                {% if category.image %}
+                    <img src="{{ category.image.url }}"
+                         class="card-img-top"
+                         style="height:120px;object-fit:contain;padding:10px;">
+                {% endif %}
+
+                <div class="card-body">
+
+                    <h6>{{ category.name }}</h6>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+<hr class="my-5">
+
+<div class="container">
+
+    <h2 class="text-center mb-4">Featured Products</h2>
+
+    <div class="row">
+
+        {% for product in featured_products %}
+
+        <div class="col-md-3 mb-4">
+
+            <div class="card h-100 shadow-sm">
+
+                {% if product.image %}
+                    <img src="{{ product.image.url }}"
+                         class="card-img-top"
+                         style="height:220px;object-fit:cover;">
+                {% endif %}
+
+                <div class="card-body">
+
+                    <h5>{{ product.name }}</h5>
+
+                    <p class="text-success fw-bold">
+                        Rs. {{ product.price }}
+                    </p>
+
+                    <a href="{% url 'product_detail' product.id %}"
+                       class="btn btn-dark w-100">
+                        View Details
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
 
 {% endblock %}

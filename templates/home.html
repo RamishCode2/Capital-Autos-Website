@@ -39,26 +39,27 @@ Shop Now
         {% for brand in brands %}
 
         <div class="col-md-4 mb-4">
+    <div class="card brand-card shadow h-100">
 
-            <div class="card brand-card shadow-lg">
+        {% if brand.logo %}
+        <img src="{{ brand.logo.url }}"
+             class="card-img-top"
+             style="height:220px;object-fit:contain;padding:20px;">
+        {% endif %}
 
-                {% if brand.logo %}
-                    <img src="{{ brand.logo.url }}" class="card-img-top">
-                {% endif %}
+        <div class="card-body text-center">
 
-                <div class="card-body text-center">
+            <h4>{{ brand.name }}</h4>
 
-                    <h4>{{ brand.name }}</h4>
-                    <a href="{% url 'brand_detail' brand.id %}"
-   class="btn btn-dark mt-3">
-    View Models
-</a>
-
-                </div>
-
-            </div>
+            <a href="{% url 'brand_detail' brand.id %}"
+               class="btn btn-dark mt-2">
+                View Models
+            </a>
 
         </div>
+
+    </div>
+</div>
 
         {% endfor %}
 

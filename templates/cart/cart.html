@@ -32,7 +32,23 @@
 
                 <td>Rs. {{ item.product.price }}</td>
 
-                <td>{{ item.quantity }}</td>
+                <td>
+
+    <a href="{% url 'decrease_quantity' item.product.id %}"
+       class="btn btn-sm btn-outline-danger">
+        -
+    </a>
+
+    <strong class="mx-2">
+        {{ item.quantity }}
+    </strong>
+
+    <a href="{% url 'increase_quantity' item.product.id %}"
+       class="btn btn-sm btn-outline-success">
+        +
+    </a>
+
+</td>
 
                 <td>Rs. {{ item.subtotal }}</td>
 

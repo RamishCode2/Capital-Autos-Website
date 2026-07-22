@@ -1,0 +1,27 @@
+.footer{
+    background:#111;
+}
+
+.footer-link{
+    color:#ccc;
+    text-decoration:none;
+    display:block;
+    margin-bottom:10px;
+    transition:.3s;
+}
+
+.footer-link:hover{
+    color:#dc3545;
+    padding-left:5px;
+}
+
+.social-icon{
+    text-decoration:none;
+    font-size:26px;
+    margin-left:12px;
+    transition:.3s;
+}
+
+.social-icon:hover{
+    transform:translateY(-4px);
+}

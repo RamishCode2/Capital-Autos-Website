@@ -81,39 +81,43 @@
 </section>
 <hr class="my-5">
 
-<div class="container">
+<section id="categories" class="py-5">
 
-    <h2 class="text-center mb-4">Popular Categories</h2>
+    <div class="container">
 
-    <div class="row">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Popular Categories</h2>
+            <p class="text-muted">
+                Find genuine auto parts by category
+            </p>
+        </div>
 
-        {% for category in categories %}
+        <div class="row">
 
-        <div class="col-md-3 col-6 mb-4">
+            {% for category in categories %}
 
-            <div class="card shadow-sm text-center h-100">
+            <div class="col-lg-3 col-md-4 col-6 mb-4">
 
-                {% if category.image %}
-                    <img src="{{ category.image.url }}"
-                         class="card-img-top"
-                         style="height:120px;object-fit:contain;padding:10px;">
-                {% endif %}
+                <div class="category-card">
 
-                <div class="card-body">
+                    {% if category.image %}
+                        <img src="{{ category.image.url }}"
+                             alt="{{ category.name }}">
+                    {% endif %}
 
-                    <h6>{{ category.name }}</h6>
+                    <h5>{{ category.name }}</h5>
 
                 </div>
 
             </div>
 
-        </div>
+            {% endfor %}
 
-        {% endfor %}
+        </div>
 
     </div>
 
-</div>
+</section>
 <hr class="my-5">
 
 <div class="container">
@@ -129,66 +133,39 @@
     </div>
 
 </div>
-<section class="py-5 bg-white">
+<section class="py-5 bg-dark text-white">
 
     <div class="container">
 
-        <h2 class="section-title text-center">
-            Why Choose Capital Autos?
-        </h2>
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Why Choose Capital Autos?</h2>
+        </div>
 
-        <div class="row mt-5">
+        <div class="row text-center">
 
-            <div class="col-md-4 text-center">
-
-                <div class="p-4">
-
-                    <h1>🚚</h1>
-
-                    <h4>Fast Delivery</h4>
-
-                    <p>
-                        Delivery available all across Pakistan.
-                    </p>
-
-                </div>
-
+            <div class="col-md-4 mb-4">
+                <h1>🚚</h1>
+                <h4>Fast Delivery</h4>
+                <p>Nationwide shipping across Pakistan.</p>
             </div>
 
-            <div class="col-md-4 text-center">
-
-                <div class="p-4">
-
-                    <h1>✔️</h1>
-
-                    <h4>Genuine Parts</h4>
-
-                    <p>
-                        High-quality auto parts for Toyota, Honda, and Suzuki.
-                    </p>
-
-                </div>
-
+            <div class="col-md-4 mb-4">
+                <h1>✅</h1>
+                <h4>Genuine Parts</h4>
+                <p>Original accessories for Toyota, Honda & Suzuki.</p>
             </div>
 
-            <div class="col-md-4 text-center">
-
-                <div class="p-4">
-
-                    <h1>💳</h1>
-
-                    <h4>Secure Payments</h4>
-
-                    <p>
-                        COD, JazzCash, EasyPaisa and Card supported.
-                    </p>
-
-                </div>
-
+            <div class="col-md-4 mb-4">
+                <h1>💳</h1>
+                <h4>Secure Payments</h4>
+                <p>COD, JazzCash, EasyPaisa & Card payments.</p>
             </div>
 
         </div>
 
+    </div>
+
+</section>
     </div>
 
 </section>

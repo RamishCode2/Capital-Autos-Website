@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-
+from django.db.models import Q
 from brands.models import CarModel
 from .models import Category, Product
 
@@ -52,3 +52,23 @@ def product_detail(request, product_id):
     }
 
     return render(request, "products/product_detail.html", context)
+def search_products(request):
+
+    query = request.GET.get("q")
+
+    products = []
+
+    if query:
+        products = Product.objects.filter(
+            Q(name__icontains=query) |
+            Q(category__name__icontains=query) |
+            Q(car_model__name__icontains=query) |
+            Q(car_model__brand__name__icontains=query)
+        ).distinct()
+
+    context = {
+        "query": query,
+        "products": products,
+    }
+
+    return render(request, "products/search_results.html", context)

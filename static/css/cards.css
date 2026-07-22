@@ -34,13 +34,63 @@
     font-size:22px;
     font-weight:bold;
 }
-.brand-card{
-    border-radius:15px;
-    overflow:hidden;
-    transition:.3s;
+.brand-card {
+    background: #fff;
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-.brand-card:hover{
+.brand-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.brand-card img {
+    height: 180px;
+    object-fit: contain;
+    padding: 30px;
+    background: #fff;
+}
+
+.brand-card .card-body {
+    padding: 25px;
+}
+
+.brand-card h4 {
+    font-weight: 700;
+    color: #222;
+}
+
+.brand-card .btn {
+    border-radius: 30px;
+    padding: 10px 25px;
+}
+.category-card{
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    text-align:center;
+    transition:.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    height:100%;
+}
+
+.category-card:hover{
     transform:translateY(-8px);
     box-shadow:0 15px 30px rgba(0,0,0,.15);
+}
+
+.category-card img{
+    width:100px;
+    height:100px;
+    object-fit:contain;
+    margin-bottom:20px;
+}
+
+.category-card h5{
+    font-weight:600;
+    color:#222;
 }

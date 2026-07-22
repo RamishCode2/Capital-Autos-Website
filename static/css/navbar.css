@@ -18,9 +18,18 @@
     color:#dc3545;
 }
 
-.custom-navbar .form-control{
-    width:250px;
+.navbar form{
+    width:45%;
+}
+
+.navbar form input{
     border-radius:30px;
+    padding:10px 20px;
+}
+
+.navbar form button{
+    border-radius:30px;
+    padding:10px 20px;
 }
 
 .custom-navbar .btn{

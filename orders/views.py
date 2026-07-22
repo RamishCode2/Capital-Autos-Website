@@ -4,7 +4,7 @@ from decimal import Decimal
 
 from django.shortcuts import get_object_or_404, redirect, render
 
-from cart.views import cart_detail
+
 from products.models import Product
 
 from .forms import CheckoutForm

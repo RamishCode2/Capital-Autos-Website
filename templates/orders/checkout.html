@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row">
+
+        <!-- Customer Information -->
+        <div class="col-lg-7">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0">Customer Information</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        {{ form.as_p }}
+
+                        <button class="btn btn-danger btn-lg mt-3">
+                            Place Order
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Order Summary -->
+        <div class="col-lg-5">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Order Summary</h4>
+                </div>
+
+                <div class="card-body">
+
+                    {% for item in items %}
+
+                    <div class="d-flex justify-content-between mb-3">
+
+                        <div>
+                            <strong>{{ item.product.name }}</strong><br>
+                            Qty: {{ item.quantity }}
+                        </div>
+
+                        <div>
+                            Rs. {{ item.subtotal }}
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    {% endfor %}
+
+                    <h4 class="text-end">
+                        Total: Rs. {{ total }}
+                    </h4>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

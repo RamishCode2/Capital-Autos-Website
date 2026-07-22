@@ -71,11 +71,9 @@
         Total: Rs. {{ total }}
     </h3>
 
-    <div class="text-end">
-        <a href="#" class="btn btn-success btn-lg">
-            Proceed to Checkout
-        </a>
-    </div>
+    <a href="{% url 'checkout' %}" class="btn btn-success btn-lg">
+    Proceed to Checkout
+</a>
 
     {% else %}
 

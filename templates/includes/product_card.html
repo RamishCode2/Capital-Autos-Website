@@ -1,14 +1,45 @@
-<div class="card h-100">
-    {% if product.image %}
-        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-    {% endif %}
+<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
 
-    <div class="card-body">
-        <h5>{{ product.name }}</h5>
-        <p>Rs. {{ product.price }}</p>
+    <div class="product-card">
 
-        <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">
-            View Details
-        </a>
+        {% if product.image %}
+        <img src="{{ product.image.url }}"
+             alt="{{ product.name }}">
+        {% else %}
+        <img src="https://via.placeholder.com/300x220?text=No+Image"
+             alt="No Image">
+        {% endif %}
+
+        <div class="product-info">
+
+            <h5>{{ product.name }}</h5>
+
+            <p class="price">
+                Rs. {{ product.price }}
+            </p>
+
+            {% if product.stock > 0 %}
+                <span class="badge bg-success">In Stock</span>
+            {% else %}
+                <span class="badge bg-danger">Out of Stock</span>
+            {% endif %}
+
+            <div class="mt-3 d-grid gap-2">
+
+                <a href="{% url 'product_detail' product.id %}"
+                   class="btn btn-dark">
+                    View Details
+                </a>
+
+                <a href="{% url 'add_to_cart' product.id %}"
+   class="btn btn-danger">
+    Add to Cart
+</a>
+
+            </div>
+
+        </div>
+
     </div>
+
 </div>

@@ -1,18 +1,42 @@
 from django.shortcuts import render, get_object_or_404
+
 from brands.models import CarModel
-from .models import Product
+from .models import Category, Product
 
 
-def product_list(request, model_id):
+def category_list(request, model_id):
     car_model = get_object_or_404(CarModel, id=model_id)
-    products = Product.objects.filter(car_model=car_model).order_by("name")
+
+    categories = Category.objects.filter(
+        products__car_model=car_model
+    ).distinct().order_by("name")
 
     context = {
         "car_model": car_model,
+        "categories": categories,
+    }
+
+    return render(request, "products/category_list.html", context)
+
+
+def product_list(request, model_id, category_id):
+    car_model = get_object_or_404(CarModel, id=model_id)
+
+    category = get_object_or_404(Category, id=category_id)
+
+    products = Product.objects.filter(
+        car_model=car_model,
+        category=category,
+        is_active=True
+    ).order_by("name")
+
+    context = {
+        "car_model": car_model,
+        "category": category,
         "products": products,
     }
 
-    return render(request, "products/product.html", context)
+    return render(request, "products/product_list.html", context)
 
 
 def product_detail(request, product_id):

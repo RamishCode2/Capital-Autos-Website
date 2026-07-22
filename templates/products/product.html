@@ -52,5 +52,34 @@
     </div>
 
 </div>
+<div class="col-lg-3">
+
+    <div class="card shadow-sm p-3">
+
+        <h5>Brands</h5>
+
+        {% for brand in brands %}
+
+        <a href="?brand={{ brand.id }}">
+            {{ brand.name }}
+        </a><br>
+
+        {% endfor %}
+
+        <hr>
+
+        <h5>Categories</h5>
+
+        {% for category in categories %}
+
+        <a href="?category={{ category.id }}">
+            {{ category.name }}
+        </a><br>
+
+        {% endfor %}
+
+    </div>
+
+</div>
 
 {% endblock %}

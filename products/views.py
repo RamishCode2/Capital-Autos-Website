@@ -4,6 +4,7 @@ from brands.models import CarModel
 from .models import Category, Product
 
 
+
 def category_list(request, model_id):
     car_model = get_object_or_404(CarModel, id=model_id)
 
@@ -20,6 +21,7 @@ def category_list(request, model_id):
 
 
 def product_list(request, model_id, category_id):
+
     car_model = get_object_or_404(CarModel, id=model_id)
 
     category = get_object_or_404(Category, id=category_id)
@@ -52,6 +54,7 @@ def product_detail(request, product_id):
     }
 
     return render(request, "products/product_detail.html", context)
+
 def search_products(request):
 
     query = request.GET.get("q")
@@ -72,3 +75,26 @@ def search_products(request):
     }
 
     return render(request, "products/search_results.html", context)
+from brands.models import Brand
+
+
+def shop(request):
+
+    products = Product.objects.filter(is_active=True)
+
+    brand = request.GET.get("brand")
+    category = request.GET.get("category")
+
+    if brand:
+        products = products.filter(car_model__brand_id=brand)
+
+    if category:
+        products = products.filter(category_id=category)
+
+    context = {
+        "products": products.order_by("name"),
+        "brands": Brand.objects.all(),
+        "categories": Category.objects.all(),
+    }
+
+    return render(request, "products/shop.html", context)

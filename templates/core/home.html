@@ -4,68 +4,81 @@
 {% block content %}
 <section class="hero">
 
-<div class="container text-center">
+    <div class="container">
 
-<h1 class="display-4 fw-bold">
+        <div class="row align-items-center">
 
-Capital Autos
+            <div class="col-lg-6">
 
-</h1>
+                <h1>
+                    Genuine Auto Parts
+                    <br>
+                    For Toyota, Honda & Suzuki
+                </h1>
 
-<p>
+                <p class="lead mt-4">
+                    Premium quality accessories and spare parts
+                    delivered all over Pakistan.
+                </p>
 
-Pakistan's Premium Auto Parts Store
+                <a href="#brands" class="btn btn-danger btn-lg mt-3">
+                    Shop Now
+                </a>
 
-</p>
-
-<a class="btn btn-warning btn-lg">
-
-Shop Now
-
-</a>
-
-</div>
-
-</section>
-
-<div class="container mt-5">
-
-    <h2 class="text-center mb-4">
-        Choose Your Brand
-    </h2>
-
-    <div class="row">
-
-        {% for brand in brands %}
-
-        <div class="col-md-4 mb-4">
-    <div class="card brand-card shadow h-100">
-
-        {% if brand.logo %}
-        <img src="{{ brand.logo.url }}"
-             class="card-img-top"
-             style="height:220px;object-fit:contain;padding:20px;">
-        {% endif %}
-
-        <div class="card-body text-center">
-
-            <h4>{{ brand.name }}</h4>
-
-            <a href="{% url 'brand_detail' brand.id %}"
-               class="btn btn-dark mt-2">
-                View Models
-            </a>
+            </div>
 
         </div>
 
     </div>
-</div>
 
-        {% endfor %}
+</section>
+
+<section id="brands" class="py-5">
+
+    <div class="container">
+
+        <h2 class="section-title text-center mb-5">
+            Shop by Brand
+        </h2>
+
+        <div class="row">
+
+            {% for brand in brands %}
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <div class="card h-100 shadow">
+
+                    {% if brand.logo %}
+                    <img src="{{ brand.logo.url }}"
+                         class="card-img-top p-4"
+                         style="height:220px;object-fit:contain;">
+                    {% endif %}
+
+                    <div class="card-body text-center">
+
+                        <h4 class="fw-bold">
+                            {{ brand.name }}
+                        </h4>
+
+                        <a href="{% url 'brand_detail' brand.id %}"
+                           class="btn btn-danger mt-3">
+                            View Models
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
 
     </div>
 
-</div>
+</section>
 <hr class="my-5">
 
 <div class="container">
@@ -116,5 +129,68 @@ Shop Now
     </div>
 
 </div>
+<section class="py-5 bg-white">
+
+    <div class="container">
+
+        <h2 class="section-title text-center">
+            Why Choose Capital Autos?
+        </h2>
+
+        <div class="row mt-5">
+
+            <div class="col-md-4 text-center">
+
+                <div class="p-4">
+
+                    <h1>🚚</h1>
+
+                    <h4>Fast Delivery</h4>
+
+                    <p>
+                        Delivery available all across Pakistan.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4 text-center">
+
+                <div class="p-4">
+
+                    <h1>✔️</h1>
+
+                    <h4>Genuine Parts</h4>
+
+                    <p>
+                        High-quality auto parts for Toyota, Honda, and Suzuki.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4 text-center">
+
+                <div class="p-4">
+
+                    <h1>💳</h1>
+
+                    <h4>Secure Payments</h4>
+
+                    <p>
+                        COD, JazzCash, EasyPaisa and Card supported.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 {% endblock %}

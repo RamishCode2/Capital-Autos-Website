@@ -1,0 +1,28 @@
+.custom-navbar{
+    background:#111;
+    padding:15px 0;
+}
+
+.custom-navbar .navbar-brand{
+    color:#fff;
+}
+
+.custom-navbar .nav-link{
+    color:#fff;
+    margin:0 10px;
+    font-weight:500;
+    transition:.3s;
+}
+
+.custom-navbar .nav-link:hover{
+    color:#dc3545;
+}
+
+.custom-navbar .form-control{
+    width:250px;
+    border-radius:30px;
+}
+
+.custom-navbar .btn{
+    border-radius:30px;
+}

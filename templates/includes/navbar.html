@@ -1,30 +1,57 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top">
     <div class="container">
 
-        <a class="navbar-brand fw-bold" href="/">
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold fs-3" href="/">
             🚗 Capital Autos
         </a>
 
-        <form class="d-flex">
-            <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search Parts..."
-            >
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <button class="btn btn-warning">
-                Search
-            </button>
-        </form>
+        <!-- Navbar Content -->
+        <div class="collapse navbar-collapse" id="mainNavbar">
 
-        <div>
+            <!-- Navigation -->
+            <ul class="navbar-nav mx-auto">
 
-            <a href="#" class="btn btn-outline-light">
-                Login
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#brands">Brands</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#categories">Categories</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#products">Products</a>
+                </li>
+
+            </ul>
+
+            <!-- Search -->
+            <form class="d-flex me-3">
+                <input class="form-control"
+                       type="search"
+                       placeholder="Search auto parts...">
+            </form>
+
+            <!-- Cart -->
+            <a href="#" class="btn btn-danger me-2">
+                🛒 Cart (0)
             </a>
 
-            <a href="#" class="btn btn-warning">
-                Cart (0)
+            <!-- Login -->
+            <a href="#" class="btn btn-outline-light">
+                Login
             </a>
 
         </div>

@@ -3,6 +3,7 @@ from django.shortcuts import render
 from decimal import Decimal
 
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.decorators import login_required
 
 
 from products.models import Product
@@ -10,9 +11,8 @@ from products.models import Product
 from .forms import CheckoutForm
 from .models import Order, OrderItem
 
-
+@login_required
 def checkout(request):
-
     cart = request.session.get("cart", {})
 
     if not cart:
@@ -75,4 +75,5 @@ def checkout(request):
             "items": items,
             "total": total,
         },
+      
     )

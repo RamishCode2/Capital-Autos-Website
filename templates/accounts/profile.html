@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h2 class="mb-4">
+        My Account
+    </h2>
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h4>
+                Welcome, {{ user.username }}
+            </h4>
+
+            <p>
+                {{ user.email }}
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header">
+
+            <h4>
+                My Orders
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            {% for order in orders %}
+
+                <div class="border-bottom py-3">
+
+                    <strong>
+                        Order #{{ order.id }}
+                    </strong>
+
+                    <br>
+
+                    Status:
+                    {{ order.status }}
+
+                    <br>
+
+                    Total:
+                    Rs. {{ order.total }}
+
+                </div>
+
+            {% empty %}
+
+                <p>
+                    You haven't placed any orders yet.
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

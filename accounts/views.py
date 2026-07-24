@@ -2,12 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-
-
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
+from django.contrib.auth import views as auth_views
+from .forms import PasswordResetSetPasswordForm
 
 
 def register(request):
@@ -47,14 +43,11 @@ def user_login(request):
 
     if request.method == "POST":
 
-        username = request.POST["username"]
+        email = request.POST["email"].strip()
         password = request.POST["password"]
 
-        user = authenticate(
-            request,
-            username=username,
-            password=password
-        )
+        user_record = User.objects.filter(email__iexact=email).first()
+        user = authenticate(request, username=user_record.username, password=password) if user_record else None
 
         if user is not None:
 
@@ -65,9 +58,36 @@ def user_login(request):
 
         else:
 
-            messages.error(request, "Invalid username or password.")
+            messages.error(request, "Invalid email or password.")
 
     return render(request, "accounts/login.html")
+
+
+class CustomPasswordResetView(auth_views.PasswordResetView):
+    template_name = "registration/password_reset_form.html"
+    email_template_name = "registration/password_reset_email.html"
+    subject_template_name = "registration/password_reset_subject.txt"
+
+    def form_valid(self, form):
+        # The same message is shown for existing and unknown email addresses.
+        messages.success(
+            self.request,
+            "If an account exists with this email, a password reset link has been sent.",
+        )
+        return super().form_valid(form)
+
+
+class PasswordResetDoneView(auth_views.PasswordResetDoneView):
+    template_name = "registration/password_reset_done.html"
+
+
+class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    template_name = "registration/password_reset_confirm.html"
+    form_class = PasswordResetSetPasswordForm
+
+
+class PasswordResetCompleteView(auth_views.PasswordResetCompleteView):
+    template_name = "registration/password_reset_complete.html"
 
 
 def user_logout(request):

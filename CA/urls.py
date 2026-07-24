@@ -19,8 +19,39 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from core.views import home
+from accounts import views as account_views
 
 urlpatterns = [
+    path(
+    "password-reset/",
+    account_views.CustomPasswordResetView.as_view(),
+    name="password_reset",
+),
+
+path(
+    "password-reset/done/",
+    account_views.PasswordResetDoneView.as_view(
+        template_name="registration/password_reset_done.html"
+    ),
+    name="password_reset_done",
+),
+
+path(
+    "reset/<uidb64>/<token>/",
+    account_views.PasswordResetConfirmView.as_view(
+        template_name="registration/password_reset_confirm.html"
+    ),
+    name="password_reset_confirm",
+),
+
+path(
+    "reset/done/",
+    account_views.PasswordResetCompleteView.as_view(
+        template_name="registration/password_reset_complete.html"
+    ),
+    name="password_reset_complete",
+),
+    path("login/", account_views.user_login, name="login"),
     path("admin/", admin.site.urls),
     path("", home, name="home"),
     path("brands/", include("brands.urls")),

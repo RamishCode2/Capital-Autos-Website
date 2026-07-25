@@ -1,14 +1,14 @@
 :root{
     --primary:#d32f2f;
-    --dark:#1a1a1a;
+    --dark:#070606;
     --light:#f8f9fa;
     --white:#ffffff;
 }
 
 body{
     font-family:'Poppins',sans-serif;
-    background:#f5f5f5;
-    color:#222;
+    background:white;
+    color:Black;
 }
 
 a{
@@ -29,15 +29,4 @@ a{
 
 .btn-primary:hover{
     background:#b71c1c;
-}
-
-.card{
-    border:none;
-    border-radius:12px;
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
 }

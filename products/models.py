@@ -16,7 +16,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
 class Product(models.Model):
     STOCK_STATUS = (
         ("in_stock", "In Stock"),
@@ -63,6 +62,32 @@ class Product(models.Model):
     description = models.TextField()
 
     is_active = models.BooleanField(default=True)
+    is_flash_sale = models.BooleanField(
+        default=False,
+        help_text="Show this product in the homepage Flash Sales section."
+    )
+    is_featured = models.BooleanField(
+        default=False,
+        help_text="Show this product in Recommended For You."
+    )
+    is_best_seller = models.BooleanField(default=False)
+    is_new = models.BooleanField(default=False)
+    badge_label = models.CharField(
+        max_length=30,
+        blank=True,
+        help_text="Optional card badge, for example: Hot, New, or Best Seller."
+    )
+    homepage_order = models.PositiveIntegerField(
+        default=0,
+        help_text="Lower numbers appear first in homepage sections."
+    )
+    average_rating = models.DecimalField(
+        max_digits=2,
+        decimal_places=1,
+        default=0,
+        help_text="Optional product rating from 0.0 to 5.0."
+    )
+    review_count = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -70,6 +95,13 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def discount_percentage(self):
+        """Return a display-friendly discount without storing duplicate data."""
+        if self.discount_price is not None and self.price:
+            return round(((self.price - self.discount_price) / self.price) * 100)
+        return 0
 
     def save(self, *args, **kwargs):
         if not self.slug:

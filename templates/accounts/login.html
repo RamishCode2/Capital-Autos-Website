@@ -1,75 +1,24 @@
 {% extends "base.html" %}
+{% load socialaccount %}
+{% get_providers as socialaccount_providers %}
 
 {% block content %}
-
-<div class="container py-5" style="max-width:500px;">
-
-    <div class="card shadow">
-
-        <div class="card-body p-4">
-
-            <h2 class="text-center mb-4">
-                Login
-            </h2>
-
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-
-            <form method="POST">
-
-                {% csrf_token %}
-
-                <div class="mb-3">
-
-                    <label for="email" class="form-label">Email Address</label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        class="form-control"
-                        autocomplete="email"
-                        required>
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label for="password" class="form-label">Password</label>
-
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        class="form-control"
-                        autocomplete="current-password"
-                        required>
-
-                </div>
-
-                <button
-                    type="submit"
-                    class="btn btn-danger w-100">
-
-                    Login
-
-                </button>
-<div class="text-center mt-3">
-    <a href="{% url 'password_reset' %}">
-        Forgot Password?
-    </a>
+<main class="auth-page"><div class="container"><div class="auth-card"><div class="auth-aside d-none d-lg-flex"><div><span class="auth-mark"><i class="bi bi-car-front-fill"></i></span><p class="text-uppercase small fw-bold mb-2">Capital Autos</p><h1>Everything your car needs, in one trusted place.</h1><p>Sign in to save your favourite parts, track orders, and check out faster.</p></div></div><div class="auth-content"><div class="auth-mobile-brand d-lg-none"><i class="bi bi-car-front-fill"></i> Capital Autos</div><h2>Welcome back</h2><p class="auth-subtitle">Sign in to continue shopping.</p>
+{% if form.non_field_errors %}<div class="alert alert-danger py-2">{{ form.non_field_errors }}</div>{% endif %}
+<form method="post">{% csrf_token %}<div class="mb-3"><label for="id_email" class="form-label">Email Address</label>{{ form.email }}{% for error in form.email.errors %}<div class="field-error">{{ error }}</div>{% endfor %}</div><div class="mb-2"><div class="d-flex justify-content-between"><label for="id_password" class="form-label">Password</label><a class="auth-link small" href="{% url 'password_reset' %}">Forgot Password?</a></div><div class="password-field">{{ form.password }}<button type="button" class="password-toggle" aria-label="Show password"><i class="bi bi-eye"></i></button></div>{% for error in form.password.errors %}<div class="field-error">{{ error }}</div>{% endfor %}</div><label class="form-check mb-4">{{ form.remember_me }}<span class="form-check-label">Remember me for 30 days</span></label><button type="submit" class="btn auth-submit w-100">Login <i class="bi bi-arrow-right ms-1"></i></button></form>
+{% if socialaccount_providers %}
+<div class="social-divider"><span>Or continue with</span></div><div class="d-grid gap-2">
+    {% for provider in socialaccount_providers %}
+        {% if provider.id == "google" %}
+            <a class="btn social-btn google-btn" href="{% provider_login_url provider.id process='login' %}"><i class="bi bi-google"></i> Continue with Google</a>
+        {% elif provider.id == "facebook" %}
+            <a class="btn social-btn facebook-btn" href="{% provider_login_url provider.id process='login' %}"><i class="bi bi-facebook"></i> Continue with Facebook</a>
+        {% else %}
+            <a class="btn social-btn btn-outline-secondary" href="{% provider_login_url provider.id process='login' %}"><i class="bi bi-person-circle"></i> Continue with {{ provider.name }}</a>
+        {% endif %}
+    {% endfor %}
 </div>
-            </form>
-
-        </div>
-
-    </div>
-
-</div>
-
+{% endif %}
+<p class="auth-switch">Don't have an account? <a class="auth-link" href="{% url 'register' %}">Sign Up</a></p></div></div></div></main>
+<script>document.querySelectorAll('.password-toggle').forEach(button=>button.addEventListener('click',()=>{const input=button.parentElement.querySelector('input');const hidden=input.type==='password';input.type=hidden?'text':'password';button.querySelector('i').className=hidden?'bi bi-eye-slash':'bi bi-eye';}));</script>
 {% endblock %}

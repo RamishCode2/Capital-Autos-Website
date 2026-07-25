@@ -60,24 +60,30 @@
 
 </form>
             <!-- Cart -->
-            <a href="#" class="btn btn-danger me-2">
-                🛒 Cart (0)
+            <a href="{% url 'cart' %}" class="btn btn-danger cart-nav-button me-2" aria-label="View shopping cart with {{ cart_item_count }} items">
+                <i class="bi bi-cart3"></i>
+                <span class="d-none d-xl-inline ms-1">Cart</span>
+                <span class="cart-count">{{ cart_item_count }}</span>
             </a>
 
             <!-- Login -->
            {% if user.is_authenticated %}
-
-<li class="nav-item">
-    <a class="nav-link" href="{% url 'profile' %}">
-        {{ user.username }}
-    </a>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link" href="{% url 'logout' %}">
-        Logout
-    </a>
-</li>
+            <div class="dropdown ms-lg-2">
+                <button class="btn btn-outline-light user-menu-toggle dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i> Hi, {{ user.first_name|default:user.username }}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end user-dropdown shadow border-0">
+                    <li><h6 class="dropdown-header">My Account</h6></li>
+                    <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="bi bi-person me-2"></i>My Profile</a></li>
+                    <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="bi bi-box-seam me-2"></i>My Orders</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-heart me-2"></i>Wishlist</a></li>
+                    <li><a class="dropdown-item" href="{% url 'cart' %}"><i class="bi bi-cart3 me-2"></i>Shopping Cart</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                    <li><a class="dropdown-item" href="{% url 'password_reset' %}"><i class="bi bi-shield-lock me-2"></i>Security</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                </ul>
+            </div>
 
 {% else %}
 

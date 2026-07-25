@@ -23,6 +23,9 @@ class ProductAdmin(admin.ModelAdmin):
         "price",
         "stock",
         "stock_status",
+        "is_flash_sale",
+        "is_featured",
+        "is_best_seller",
         "is_active",
     )
 
@@ -30,6 +33,10 @@ class ProductAdmin(admin.ModelAdmin):
         "brand",
         "category",
         "stock_status",
+        "is_flash_sale",
+        "is_featured",
+        "is_best_seller",
+        "is_new",
         "is_active",
     )
 
@@ -39,3 +46,15 @@ class ProductAdmin(admin.ModelAdmin):
     )
 
     inlines = [ProductImageInline]
+    list_editable = (
+        "is_flash_sale",
+        "is_featured",
+        "is_best_seller",
+        "is_active",
+    )
+    fieldsets = (
+        ("Product information", {"fields": ("name", "slug", "sku", "brand", "car_model", "category", "description", "image")}),
+        ("Pricing & availability", {"fields": ("price", "discount_price", "stock", "stock_status", "is_active")}),
+        ("Homepage placement", {"fields": ("is_flash_sale", "is_featured", "is_best_seller", "is_new", "badge_label", "homepage_order")}),
+        ("Customer feedback", {"fields": ("average_rating", "review_count")}),
+    )

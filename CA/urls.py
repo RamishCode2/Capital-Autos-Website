@@ -52,6 +52,7 @@ path(
     name="password_reset_complete",
 ),
     path("login/", account_views.user_login, name="login"),
+    path("accounts/social/", include("allauth.socialaccount.urls")),
     path("admin/", admin.site.urls),
     path("", home, name="home"),
     path("brands/", include("brands.urls")),

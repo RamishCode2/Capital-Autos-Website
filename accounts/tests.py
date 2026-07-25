@@ -28,3 +28,8 @@ class PasswordResetFlowTests(TestCase):
             reverse("login"), {"email": self.user.email, "password": "OldPassword123"}
         )
         self.assertEqual(response.status_code, 302)
+
+    def test_login_page_renders_without_social_apps(self):
+        response = self.client.get(reverse("login"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Welcome back")

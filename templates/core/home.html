@@ -1,173 +1,35 @@
 {% extends "base.html" %}
+{% load static %}
 
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/home.css' %}">{% endblock %}
 
 {% block content %}
-<section class="hero">
-
-    <div class="container">
-
-        <div class="row align-items-center">
-
-            <div class="col-lg-6">
-
-                <h1>
-                    Genuine Auto Parts
-                    <br>
-                    For Toyota, Honda & Suzuki
-                </h1>
-
-                <p class="lead mt-4">
-                    Premium quality accessories and spare parts
-                    delivered all over Pakistan.
-                </p>
-
-                <a href="#brands" class="btn btn-danger btn-lg mt-3">
-                    Shop Now
-                </a>
-
-            </div>
-
+<main class="home-page">
+    <section id="top-deals" class="carousel slide carousel-fade auto-carousel" data-bs-ride="carousel" data-bs-interval="5000" aria-label="Current offers">
+        <div class="carousel-indicators">{% if hero_slides %}{% for slide in hero_slides %}<button type="button" data-bs-target="#top-deals" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" {% if forloop.first %}aria-current="true"{% endif %} aria-label="{{ slide.title }}"></button>{% endfor %}{% else %}<button type="button" data-bs-target="#top-deals" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Mega Flash Sale"></button><button type="button" data-bs-target="#top-deals" data-bs-slide-to="1" aria-label="Premium Engine Oils"></button><button type="button" data-bs-target="#top-deals" data-bs-slide-to="2" aria-label="Brake Parts"></button><button type="button" data-bs-target="#top-deals" data-bs-slide-to="3" aria-label="Weekend Deals"></button>{% endif %}</div>
+        <div class="carousel-inner">
+            {% if hero_slides %}
+            {% for slide in hero_slides %}<div class="carousel-item {% if forloop.first %}active{% endif %}"><div class="hero-slide slide-one"{% if slide.background_image %} style="background-image: url('{{ slide.background_image.url }}');"{% endif %}><div class="container"><div class="col-lg-8"><div class="hero-eyebrow"><i class="bi bi-lightning-charge-fill"></i> {{ slide.eyebrow }}</div><h1 class="hero-heading">{{ slide.title|linebreaksbr }}</h1>{% if slide.description %}<p class="hero-copy">{{ slide.description }}</p>{% endif %}<a class="btn hero-cta" href="{{ slide.button_url }}">{{ slide.button_label }} <i class="bi bi-arrow-right ms-1"></i></a></div></div></div></div>{% endfor %}
+            {% else %}
+            <div class="carousel-item active"><div class="hero-slide slide-one"><div class="container"><div class="col-lg-8"><div class="hero-eyebrow"><i class="bi bi-lightning-charge-fill"></i> Limited stock available</div><h1 class="hero-heading">Mega Flash Sale<br><span class="text-danger">Up to 50% OFF</span></h1><p class="hero-copy">Genuine Toyota parts, quality checked and ready to ship across Pakistan.</p><a class="btn hero-cta" href="{% url 'shop' %}">Shop Now <i class="bi bi-arrow-right ms-1"></i></a></div></div></div></div>
+            <div class="carousel-item"><div class="hero-slide slide-two"><div class="container"><div class="col-lg-8"><div class="hero-eyebrow"><i class="bi bi-droplet-fill"></i> Care for every kilometre</div><h2 class="hero-heading">Premium<br>Engine Oils</h2><p class="hero-copy">Best prices this week on trusted performance oils and maintenance essentials.</p><a class="btn hero-cta" href="{% url 'shop' %}">View Collection <i class="bi bi-arrow-right ms-1"></i></a></div></div></div></div>
+            <div class="carousel-item"><div class="hero-slide slide-three"><div class="container"><div class="col-lg-8"><div class="hero-eyebrow"><i class="bi bi-gear-fill"></i> Drive with confidence</div><h2 class="hero-heading">Brake Pads &amp;<br>Suspension Parts</h2><p class="hero-copy">High quality parts with fast delivery across Pakistan.</p><a class="btn hero-cta" href="{% url 'shop' %}">Browse Products <i class="bi bi-arrow-right ms-1"></i></a></div></div></div></div>
+            <div class="carousel-item"><div class="hero-slide slide-four"><div class="container"><div class="col-lg-8"><div class="hero-eyebrow"><i class="bi bi-gift-fill"></i> Ends Sunday night</div><h2 class="hero-heading">Weekend<br>Deals</h2><p class="hero-copy">Limited-time offers and free shipping on selected items.</p><a class="btn hero-cta" href="{% url 'shop' %}">Explore Offers <i class="bi bi-arrow-right ms-1"></i></a></div></div></div></div>
+            {% endif %}
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#top-deals" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></button><button class="carousel-control-next" type="button" data-bs-target="#top-deals" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></button>
+    </section>
 
-    </div>
+    <section class="home-section flash-section" id="products"><div class="container"><div class="d-flex align-items-end justify-content-between mb-4"><div><div class="section-kicker">Prices move fast</div><h2 class="home-section-title">⚡ Flash Sales</h2></div><a href="{% url 'shop' %}" class="section-link">View All <i class="bi bi-arrow-right"></i></a></div><div class="row g-3 g-lg-4">
+        {% for product in flash_products %}{% include "includes/home_product_card.html" with badge="Sale" %}{% empty %}<div class="col-12"><p class="text-muted mb-0">Flash sale products will appear here soon.</p></div>{% endfor %}
+    </div></div></section>
 
-</section>
+    <section class="home-section" id="categories"><div class="container"><div class="text-center mb-4"><div class="section-kicker">Find the right fit</div><h2 class="home-section-title">Browse Categories</h2></div><div class="row g-3 g-lg-4">
+        {% for category in categories %}<div class="col-6 col-md-4 col-lg-3"><a class="category-card-new" href="{% url 'shop' %}?category={{ category.id }}"><div class="category-image">{% if category.image %}<img loading="lazy" src="{{ category.image.url }}" alt="{{ category.name }}">{% else %}<div class="category-fallback d-flex align-items-center justify-content-center"><i class="bi bi-gear-wide-connected fs-1 text-secondary"></i></div>{% endif %}</div><div class="category-meta"><h3>{{ category.name }}</h3><span>{{ category.products.count }} product{{ category.products.count|pluralize }}</span></div></a></div>{% empty %}<div class="col-12 text-center text-muted">Categories will appear here soon.</div>{% endfor %}
+    </div></div></section>
 
-<section id="brands" class="py-5">
-
-    <div class="container">
-
-        <h2 class="section-title text-center mb-5">
-            Shop by Brand
-        </h2>
-
-        <div class="row">
-
-            {% for brand in brands %}
-
-            <div class="col-lg-4 col-md-6 mb-4">
-
-                <div class="card h-100 shadow">
-
-                    {% if brand.logo %}
-                    <img src="{{ brand.logo.url }}"
-                         class="card-img-top p-4"
-                         style="height:220px;object-fit:contain;">
-                    {% endif %}
-
-                    <div class="card-body text-center">
-
-                        <h4 class="fw-bold">
-                            {{ brand.name }}
-                        </h4>
-
-                        <a href="{% url 'brand_detail' brand.id %}"
-                           class="btn btn-danger mt-3">
-                            View Models
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            {% endfor %}
-
-        </div>
-
-    </div>
-
-</section>
-<hr class="my-5">
-
-<section id="categories" class="py-5">
-
-    <div class="container">
-
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">Popular Categories</h2>
-            <p class="text-muted">
-                Find genuine auto parts by category
-            </p>
-        </div>
-
-        <div class="row">
-
-            {% for category in categories %}
-
-            <div class="col-lg-3 col-md-4 col-6 mb-4">
-
-                <div class="category-card">
-
-                    {% if category.image %}
-                        <img src="{{ category.image.url }}"
-                             alt="{{ category.name }}">
-                    {% endif %}
-
-                    <h5>{{ category.name }}</h5>
-
-                </div>
-
-            </div>
-
-            {% endfor %}
-
-        </div>
-
-    </div>
-
-</section>
-<hr class="my-5">
-
-<div class="container">
-
-    <h2 class="text-center mb-4">Featured Products</h2>
-
-    <div class="row">
-
-        {% for product in featured_products %}
-    {% include "includes/product_card.html" %}
-{% endfor %}
-
-    </div>
-
-</div>
-<section class="py-5 bg-dark text-white">
-
-    <div class="container">
-
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">Why Choose Capital Autos?</h2>
-        </div>
-
-        <div class="row text-center">
-
-            <div class="col-md-4 mb-4">
-                <h1>🚚</h1>
-                <h4>Fast Delivery</h4>
-                <p>Nationwide shipping across Pakistan.</p>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <h1>✅</h1>
-                <h4>Genuine Parts</h4>
-                <p>Original accessories for Toyota, Honda & Suzuki.</p>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <h1>💳</h1>
-                <h4>Secure Payments</h4>
-                <p>COD, JazzCash, EasyPaisa & Card payments.</p>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-    </div>
-
-</section>
-
+    <section class="home-section recommend-section"><div class="container"><div class="d-flex align-items-end justify-content-between mb-4"><div><div class="section-kicker">Picked for your drive</div><h2 class="home-section-title">Recommended For You</h2></div><a href="{% url 'shop' %}" class="section-link d-none d-sm-inline-block">Shop All <i class="bi bi-arrow-right"></i></a></div><div class="row g-3 g-lg-4">
+        {% for product in recommended_products %}{% include "includes/home_product_card.html" with badge="Best Seller" %}{% empty %}<div class="col-12"><p class="text-muted mb-0">Featured products will appear here soon.</p></div>{% endfor %}
+    </div><div class="text-center mt-5"><a class="btn load-more" href="{% url 'shop' %}">Load More Products <i class="bi bi-arrow-down ms-1"></i></a></div></div></section>
+</main>
 {% endblock %}

@@ -1,0 +1,432 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+
+About Us | Capital Autos
+
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'css/about.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<!-- HERO -->
+
+<section class="about-hero">
+
+<div class="hero-overlay">
+
+<div class="container">
+
+<div class="row align-items-center">
+
+<div class="col-lg-6">
+
+<nav class="breadcrumb-nav">
+
+<a href="/">Home</a>
+
+<span>
+
+<i class="bi bi-chevron-right"></i>
+
+</span>
+
+<span class="active">
+
+About Us
+
+</span>
+
+</nav>
+
+<h1 class="hero-title">
+
+ABOUT
+
+<span>
+
+CAPITAL AUTOS
+
+</span>
+
+</h1>
+
+<div class="hero-line">
+
+<div class="red-line"></div>
+
+<div class="white-line"></div>
+
+</div>
+
+<p class="hero-text">
+
+At Capital Autos, we are passionate about cars and
+committed to providing genuine auto parts,
+accessories and exceptional customer service.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ================= OUR STORY ================= -->
+
+<section class="our-story py-5">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <!-- Left -->
+
+            <div class="col-lg-5">
+
+                <span class="section-tag">
+                    OUR STORY
+                </span>
+
+                <h2 class="section-title">
+                    DRIVEN BY PASSION,<br>
+                    FOCUSED ON YOU
+                </h2>
+
+                <div class="title-line mb-4">
+                    <span class="line-red"></span>
+                    <span class="line-black"></span>
+                </div>
+
+                <p class="story-text">
+                    Capital Autos was founded with one mission:
+                    to provide genuine automotive parts and
+                    accessories at competitive prices while
+                    delivering exceptional customer service.
+                </p>
+
+                <p class="story-text">
+                    Whether you're maintaining your daily vehicle
+                    or upgrading your dream car, we're committed
+                    to supplying reliable products from trusted
+                    brands for every journey.
+                </p>
+
+                <a href="{% url 'contact' %}" class="btn-story">
+                    <i class="bi bi-person"></i>
+                    Learn More About Us
+                </a>
+
+            </div>
+
+            <!-- Right -->
+
+            <div class="col-lg-7">
+
+                <img src="{% static 'images/about/showroom.avif' %}"
+                     class="img-fluid showroom-img"
+                     alt="Capital Autos Showroom">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ================= WHY CHOOSE US ================= -->
+
+<section class="why-us">
+
+    <div class="container">
+
+        <div class="row text-center">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-box">
+
+                    <div class="feature-icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+
+                    <h4>Quality Products</h4>
+
+                    <p>
+                        We offer only genuine auto parts from
+                        trusted international brands.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-box">
+
+                    <div class="feature-icon">
+                        <i class="bi bi-headset"></i>
+                    </div>
+
+                    <h4>Customer Support</h4>
+
+                    <p>
+                        Our support team is always ready
+                        to help you choose the right parts.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-box">
+
+                    <div class="feature-icon">
+                        <i class="bi bi-award"></i>
+                    </div>
+
+                    <h4>Trust & Reliability</h4>
+
+                    <p>
+                        Thousands of satisfied customers
+                        trust Capital Autos every day.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-box">
+
+                    <div class="feature-icon">
+                        <i class="bi bi-truck"></i>
+                    </div>
+
+                    <h4>Fast Delivery</h4>
+
+                    <p>
+                        Nationwide delivery across Pakistan
+                        with safe and secure shipping.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ================= OUR VALUES ================= -->
+
+<section class="our-values py-5">
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+            <!-- Left Side -->
+
+            <div class="col-lg-5">
+
+                <span class="section-tag">
+                    OUR VALUES
+                </span>
+
+                <h2 class="section-title">
+                    WHAT WE STAND FOR
+                </h2>
+
+                <div class="title-line mb-5">
+                    <span class="line-red"></span>
+                    <span class="line-black"></span>
+                </div>
+
+                <!-- Value 1 -->
+
+                <div class="value-item">
+
+                    <div class="value-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <div>
+
+                        <h4>Customer First</h4>
+
+                        <p>
+                            Every decision we make begins with our
+                            customers. Their satisfaction is our priority.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Value 2 -->
+
+                <div class="value-item">
+
+                    <div class="value-icon">
+                        <i class="bi bi-star"></i>
+                    </div>
+
+                    <div>
+
+                        <h4>Quality</h4>
+
+                        <p>
+                            We never compromise on the quality of
+                            the products we supply.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Value 3 -->
+
+                <div class="value-item">
+
+                    <div class="value-icon">
+                        <i class="bi bi-handshake"></i>
+                    </div>
+
+                    <div>
+
+                        <h4>Integrity</h4>
+
+                        <p>
+                            Honest pricing, transparent service,
+                            and long-term relationships.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Value 4 -->
+
+                <div class="value-item">
+
+                    <div class="value-icon">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+
+                    <div>
+
+                        <h4>Excellence</h4>
+
+                        <p>
+                            We continuously improve our service,
+                            products, and customer experience.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Right Side -->
+
+            <div class="col-lg-7">
+
+                <img src="{% static 'images/about/carparts.webp' %}"
+                     class="img-fluid values-image"
+                     alt="Auto Parts">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ================= FINAL CTA ================= -->
+
+<section class="about-cta">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <!-- Left -->
+
+            <div class="col-lg-6">
+
+                <div class="cta-brand">
+
+                    <h2>
+                        🚗 CAPITAL AUTOS
+                    </h2>
+
+                    <p>
+                        Your One-Stop Destination for Genuine Auto Parts,
+                        Accessories and Professional Automotive Solutions.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Right -->
+
+            <div class="col-lg-6">
+
+                <div class="cta-contact">
+
+                    <div class="cta-icon">
+
+                        <i class="bi bi-telephone-fill"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Have Questions?
+                        </h3>
+
+                        <p>
+                            Our team is here to help you find the right auto parts.
+                        </p>
+
+                    </div>
+
+                    <a href="{% url 'contact' %}" class="btn-contact">
+
+                        Contact Us
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

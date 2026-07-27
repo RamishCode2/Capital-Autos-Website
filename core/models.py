@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class HeroSlide(models.Model):
     eyebrow = models.CharField(max_length=80, blank=True)
     title = models.CharField(max_length=150)
@@ -16,3 +15,22 @@ class HeroSlide(models.Model):
 
     def __str__(self):
         return self.title
+
+
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=150)
+    message = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = "Contact Message"
+        verbose_name_plural = "Contact Messages"
+
+    def __str__(self):
+        return f"{self.name} - {self.subject}"

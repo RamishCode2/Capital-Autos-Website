@@ -1,0 +1,400 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact Us | Capital Autos{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="contact-hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="container position-relative">
+
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb-nav">
+            <a href="{% url 'home' %}">Home</a>
+            <span class="mx-2"></span>
+            <span class="text-danger">Contact Us</span>
+        </nav>
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <h1 class="hero-title">
+                    CONTACT
+                    <span>US</span>
+                </h1>
+
+                <div class="title-line">
+                    <span class="red"></span>
+                    <span class="white"></span>
+                </div>
+
+                <p class="hero-text">
+                    We're here to help! Whether you have a question about our
+                    products, need assistance, or just want to say hello,
+                    feel free to reach out to us.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+{% if messages %}
+<div class="container mt-4">
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+<!-- Contact Section -->
+<section class="contact-section py-5">
+
+    <div class="container">
+
+        <div class="row g-5">
+
+            <!-- Left Side -->
+            <div class="col-lg-5">
+
+                <h6 class="section-subtitle text-danger fw-bold">
+                    GET IN TOUCH
+                </h6>
+
+                <h2 class="section-title mb-4">
+                    We're Always Here To Help
+                </h2>
+
+                <p class="text-muted mb-5">
+                    Reach out to us using any of the methods below.
+                </p>
+
+                <!-- Phone -->
+                <div class="contact-item d-flex mb-4">
+
+                    <div class="contact-icon">
+                        <i class="bi bi-telephone-fill"></i>
+                    </div>
+
+                    <div>
+
+                        <h5>Phone</h5>
+
+                        <p>
+                            Sheikh Fiaz Hussain<br>
+                            <a href="tel:+923214150628">0321-4150628</a>
+                        </p>
+
+                        <p>
+                            Muhammad Zaki<br>
+                            <a href="tel:+923084513847">0308-4513847</a>
+                        </p>
+
+                        <p>
+                            Muhammad Qavi<br>
+                            <a href="tel:+923214884894">0321-4884894</a>
+                        </p>
+
+                        <p>
+                            Gull Mehdi<br>
+                            <a href="tel:+923209436735">0320-9436735</a>
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Email -->
+                <div class="contact-item d-flex mb-4">
+
+                    <div class="contact-icon">
+                        <i class="bi bi-envelope-fill"></i>
+                    </div>
+
+                    <div>
+
+                        <h5>Email</h5>
+
+                        <p>caautos40@gmail.com</p>
+
+                    </div>
+
+                </div>
+
+                <!-- Address -->
+                <div class="contact-item d-flex mb-4">
+
+                    <div class="contact-icon">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+
+                    <div>
+
+                        <h5>Address</h5>
+
+                        <p>Lahore, Punjab, Pakistan</p>
+
+                    </div>
+
+                </div>
+
+                <!-- Business Hours -->
+                <div class="contact-item d-flex">
+
+                    <div class="contact-icon">
+                        <i class="bi bi-clock-fill"></i>
+                    </div>
+
+                    <div>
+
+                        <h5>Business Hours</h5>
+
+                        <p>Mon - Sat : 9:00 AM - 7:00 PM</p>
+                        <p>Sunday : Closed</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Right Side -->
+            <div class="col-lg-7">
+
+                <div class="contact-form-card">
+
+                    <h6 class="text-danger fw-bold">
+                        SEND US A MESSAGE
+                    </h6>
+
+                    <h2 class="mb-4">
+                        We'd Love To Hear From You
+                    </h2>
+
+                    <form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.non_field_errors }}
+
+    <div class="mb-3">
+        {{ form.name }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.email }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.subject }}
+    </div>
+
+    <div class="mb-4">
+        {{ form.message }}
+    </div>
+
+    <button type="submit" class="btn btn-danger btn-lg w-100">
+        <i class="bi bi-send-fill me-2"></i>
+        Send Message
+    </button>
+
+</form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ===========================
+     MAP SECTION
+=========================== -->
+
+<section class="map-section py-5">
+
+    <div class="container">
+
+        <div class="row g-0 shadow rounded-4 overflow-hidden">
+
+            <!-- Google Map -->
+
+            <div class="col-lg-7">
+
+                <div class="ratio ratio-4x3 h-100">
+
+                    <iframe
+                        src="https://www.google.com/maps?q=31.56925,74.3278889&z=16&output=embed"
+                        allowfullscreen=""
+                        loading="lazy"
+                        style="border:0;">
+                    </iframe>
+
+                </div>
+
+            </div>
+
+            <!-- Right Card -->
+
+            <div class="col-lg-5">
+
+                <div class="showroom-card">
+
+                    <div class="showroom-icon">
+
+                        <i class="bi bi-geo-alt-fill"></i>
+
+                    </div>
+
+                    <h2>
+
+                        <span>VISIT</span> OUR SHOWROOM
+
+                    </h2>
+
+                    <div class="section-line">
+
+                        <span class="red"></span>
+                        <span class="white"></span>
+
+                    </div>
+
+                    <p>
+
+                        Come visit our showroom and explore our premium
+                        collection of genuine auto parts and accessories.
+
+                    </p>
+
+                    <a href="https://www.google.com/maps/place/31%C2%B034'09.3%22N+74%C2%B019'40.4%22E/@31.5692454,74.3253027,17z/data=!4m4!3m3!8m2!3d31.56925!4d74.3278889"
+                       target="_blank"
+                       class="btn btn-outline-danger btn-lg">
+
+                        <i class="bi bi-car-front-fill me-2"></i>
+
+                        Get Directions
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- FEATURES -->
+
+<section class="py-5 bg-light">
+
+    <div class="container">
+
+        <div class="row text-center">
+
+            <div class="col-md-3 mb-4">
+
+                <i class="bi bi-headset display-5 text-danger"></i>
+
+                <h5 class="mt-3">Quick Support</h5>
+
+                <p class="text-muted">
+                    Our support team is always ready to help.
+                </p>
+
+            </div>
+
+            <div class="col-md-3 mb-4">
+
+                <i class="bi bi-shield-check display-5 text-danger"></i>
+
+                <h5 class="mt-3">Reliable Service</h5>
+
+                <p class="text-muted">
+                    Genuine products with trusted quality.
+                </p>
+
+            </div>
+
+            <div class="col-md-3 mb-4">
+
+                <i class="bi bi-people display-5 text-danger"></i>
+
+                <h5 class="mt-3">Customer Focused</h5>
+
+                <p class="text-muted">
+                    Customer satisfaction is our priority.
+                </p>
+
+            </div>
+
+            <div class="col-md-3 mb-4">
+
+                <i class="bi bi-lightning-charge display-5 text-danger"></i>
+
+                <h5 class="mt-3">Fast Response</h5>
+
+                <p class="text-muted">
+                    We reply to every enquiry quickly.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="contact-bottom py-5">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <h2 class="text-white mb-2">
+                    Capital Autos
+                </h2>
+
+                <p class="text-light">
+                    Your One Stop Destination For Auto Parts & Accessories
+                </p>
+
+            </div>
+
+            <div class="col-lg-6 text-lg-end">
+
+                <a href="tel:+923214150628"
+                   class="btn btn-danger btn-lg">
+
+                    <i class="bi bi-telephone-fill me-2"></i>
+
+                    Need Immediate Help?
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

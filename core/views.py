@@ -1,8 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.db.models import Q
 from brands.models import Brand
 from products.models import Category, Product
 from .models import HeroSlide
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+
+from .forms import ContactForm
+
+from django.shortcuts import render
 
 
 def home(request):
@@ -28,3 +35,69 @@ def home(request):
     }
 
     return render(request, "core/home.html", context)
+def about(request):
+    return render(request, "about.html")
+
+
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+from django.shortcuts import render, redirect
+
+from .forms import ContactForm
+
+
+def contact(request):
+
+    if request.method == "POST":
+
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+
+            enquiry = form.save()
+
+            send_mail(
+
+                subject=f"New Contact: {enquiry.subject}",
+
+                message=f"""
+New Contact Form Submission
+
+Name: {enquiry.name}
+
+Email: {enquiry.email}
+
+Subject: {enquiry.subject}
+
+Message:
+
+{enquiry.message}
+""",
+
+                from_email=settings.DEFAULT_FROM_EMAIL,
+
+                recipient_list=[settings.DEFAULT_FROM_EMAIL],
+
+                fail_silently=True,
+
+            )
+
+            messages.success(
+                request,
+                "Thank you! Your message has been sent successfully."
+            )
+
+            return redirect("contact")
+
+    else:
+
+        form = ContactForm()
+
+    return render(
+        request,
+        "contact.html",
+        {
+            "form": form
+        }
+    )

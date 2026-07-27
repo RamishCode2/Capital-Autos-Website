@@ -55,6 +55,7 @@ path(
     path("accounts/social/", include("allauth.socialaccount.urls")),
     path("admin/", admin.site.urls),
     path("", home, name="home"),
+    path("", include("core.urls")),
     path("brands/", include("brands.urls")),
     path("products/", include("products.urls")),
     path("cart/", include("cart.urls")),

@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}FAQs | Capital Autos{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="about-hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="container position-relative">
+
+        <nav class="breadcrumb-nav mb-4">
+            <a href="{% url 'home' %}">Home</a>
+            <span class="mx-2">›</span>
+            <span class="text-danger">FAQs</span>
+        </nav>
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-7">
+
+                <h1 class="hero-title">
+                    FREQUENTLY
+                    <span>ASKED QUESTIONS</span>
+                </h1>
+
+                <div class="title-line">
+                    <span class="red"></span>
+                    <span class="white"></span>
+                </div>
+
+                <p class="hero-text">
+                    Find answers to the questions our customers ask most often.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FAQ Section -->
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2 class="fw-bold">
+                How Can We Help You?
+            </h2>
+
+            <p class="text-muted">
+                Browse our frequently asked questions below.
+            </p>
+
+        </div>
+
+        <div class="accordion" id="faqAccordion">
+
+            {% for item in faqs %}
+
+            <div class="accordion-item shadow-sm border-0 mb-3 rounded-4 overflow-hidden">
+
+                <h2 class="accordion-header">
+
+                    <button
+                        class="accordion-button collapsed fw-semibold"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#faq{{ item.id }}">
+
+                        {{ item.question }}
+
+                    </button>
+
+                </h2>
+
+                <div
+                    id="faq{{ item.id }}"
+                    class="accordion-collapse collapse"
+                    data-bs-parent="#faqAccordion">
+
+                    <div class="accordion-body">
+
+                        {{ item.answer|linebreaks }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="alert alert-info">
+
+                No FAQs available.
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

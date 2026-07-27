@@ -5,6 +5,20 @@ urlpatterns = [
 
     path("about/", views.about, name="about"),
     path("contact/", views.contact, name="contact"),
+    path(
+        "privacy-policy/",
+        views.privacy_policy,
+        name="privacy_policy",
+    ),
+    path(
+        "returns/",
+        views.returns,
+        name="returns",
+    ),
+    path(
+        "faqs/",
+        views.faq,
+        name="faq",
+    ),
 
 ]
-

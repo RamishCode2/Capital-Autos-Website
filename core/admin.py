@@ -1,6 +1,12 @@
 from django.contrib import admin
 from .models import HeroSlide
 from .models import ContactMessage
+from django.contrib import admin
+from .models import (
+    PrivacyPolicy,
+    ReturnPolicy,
+    FAQ,
+)
 
 
 @admin.register(HeroSlide)
@@ -32,3 +38,28 @@ class ContactMessageAdmin(admin.ModelAdmin):
     )
 
     list_editable = ("is_read",)
+
+@admin.register(PrivacyPolicy)
+class PrivacyPolicyAdmin(admin.ModelAdmin):
+    list_display = ("title", "updated_at")
+
+
+@admin.register(ReturnPolicy)
+class ReturnPolicyAdmin(admin.ModelAdmin):
+    list_display = ("title", "updated_at")
+
+
+@admin.register(FAQ)
+class FAQAdmin(admin.ModelAdmin):
+    list_display = (
+        "question",
+        "order",
+        "is_active",
+    )
+
+    list_editable = (
+        "order",
+        "is_active",
+    )
+
+    search_fields = ("question",)

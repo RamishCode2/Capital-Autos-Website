@@ -6,11 +6,14 @@ from .models import HeroSlide
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
-
+from .models import PrivacyPolicy, ReturnPolicy, FAQ
 from .forms import ContactForm
-
 from django.shortcuts import render
-
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+from django.shortcuts import render, redirect
+from .forms import ContactForm
 
 def home(request):
     brands = Brand.objects.all()
@@ -37,15 +40,6 @@ def home(request):
     return render(request, "core/home.html", context)
 def about(request):
     return render(request, "about.html")
-
-
-from django.contrib import messages
-from django.core.mail import send_mail
-from django.conf import settings
-from django.shortcuts import render, redirect
-
-from .forms import ContactForm
-
 
 def contact(request):
 
@@ -99,5 +93,39 @@ Message:
         "contact.html",
         {
             "form": form
+        }
+    )
+def privacy_policy(request):
+    policy = PrivacyPolicy.objects.first()
+
+    return render(
+        request,
+        "legal/privacy_policy.html",
+        {
+            "policy": policy
+        }
+    )
+
+
+def returns(request):
+    policy = ReturnPolicy.objects.first()
+
+    return render(
+        request,
+        "legal/return.html",
+        {
+            "policy": policy
+        }
+    )
+
+
+def faq(request):
+    faqs = FAQ.objects.filter(is_active=True)
+
+    return render(
+        request,
+        "legal/faq.html",
+        {
+            "faqs": faqs
         }
     )

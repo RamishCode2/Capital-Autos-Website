@@ -1,0 +1,32 @@
+.policy-content{
+
+font-size:17px;
+
+line-height:1.9;
+
+color:#555;
+
+}
+
+.policy-content h2,
+.policy-content h3{
+
+margin-top:35px;
+
+font-weight:700;
+
+color:#111;
+
+}
+
+.policy-content ul{
+
+padding-left:20px;
+
+}
+
+.policy-content li{
+
+margin-bottom:10px;
+
+}

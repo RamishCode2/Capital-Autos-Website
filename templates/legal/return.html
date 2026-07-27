@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Returns & Refunds | Capital Autos{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section class="about-hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="container position-relative">
+
+        <nav class="breadcrumb-nav mb-4">
+            <a href="{% url 'home' %}">Home</a>
+            <span class="mx-2">›</span>
+            <span class="text-danger">Returns & Refunds</span>
+        </nav>
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-7">
+
+                <h1 class="hero-title">
+                    RETURNS &
+                    <span>REFUNDS</span>
+                </h1>
+
+                <div class="title-line">
+                    <span class="red"></span>
+                    <span class="white"></span>
+                </div>
+
+                <p class="hero-text">
+                    Read our return, exchange and refund policy before placing an order.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Content -->
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="card border-0 shadow-lg rounded-4">
+
+            <div class="card-body p-5">
+
+                <h2>{{ policy.title }}</h2>
+
+                <p class="text-muted">
+                    Last Updated:
+                    {{ policy.updated_at|date:"F d, Y" }}
+                </p>
+
+                <hr>
+
+                <div class="policy-content">
+
+                    {{ policy.content|linebreaks }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

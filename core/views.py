@@ -1,12 +1,16 @@
 from django.shortcuts import redirect, render
+from django import forms
 from django.db.models import Q
+from django.core.exceptions import ValidationError
+from django.utils.http import url_has_allowed_host_and_scheme
+from django.views.decorators.http import require_POST
 from brands.models import Brand
 from products.models import Category, Product
 from .models import HeroSlide
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
-from .models import PrivacyPolicy, ReturnPolicy, FAQ
+from .models import PrivacyPolicy, ReturnPolicy, FAQ, NewsletterSubscriber
 from .forms import ContactForm
 from django.shortcuts import render
 from django.contrib import messages
@@ -129,3 +133,22 @@ def faq(request):
             "faqs": faqs
         }
     )
+
+
+@require_POST
+def newsletter_subscribe(request):
+    try:
+        email = forms.EmailField().clean(request.POST.get("email", "")).lower()
+    except ValidationError:
+        messages.error(request, "Enter a valid email address to subscribe.")
+    else:
+        subscriber, _ = NewsletterSubscriber.objects.get_or_create(email=email)
+        if not subscriber.is_active:
+            subscriber.is_active = True
+            subscriber.save(update_fields=["is_active"])
+        messages.success(request, "You are subscribed to Capital Autos updates.")
+
+    next_url = request.POST.get("next", "")
+    if url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
+        return redirect(next_url)
+    return redirect("home")

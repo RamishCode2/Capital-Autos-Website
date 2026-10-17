@@ -1,0 +1,38 @@
+.list-group-item{
+    border:0;
+    padding:15px 20px;
+    transition:.3s;
+}
+
+.list-group-item:hover{
+    background:#f8f9fa;
+    padding-left:28px;
+}
+
+.list-group-item.active{
+    background:#dc3545;
+    border-color:#dc3545;
+}
+
+.card{
+    border-radius:20px;
+}
+
+form input,
+form textarea,
+form select{
+    border-radius:10px !important;
+}
+
+.btn-danger{
+    border-radius:10px;
+}
+.profile-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 1rem;
+}

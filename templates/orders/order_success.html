@@ -1,29 +1,43 @@
 {% extends "base.html" %}
 
+{% block title %}Order Success{% endblock %}
+
 {% block content %}
 
 <div class="container py-5 text-center">
 
-    <div class="card shadow-lg p-5">
+    <div class="card shadow border-0 p-5">
 
         <h1 class="text-success">
-            🎉 Thank You!
+
+            🎉 Order Placed Successfully
+
         </h1>
 
-        <p class="lead mt-3">
-
-            Your order has been placed successfully.
-
-        </p>
+        <br>
 
         <h4>
 
-            Order #{{ order.id }}
+            Order Number
 
         </h4>
 
+        <h2 class="text-danger">
+
+            {{ order.order_number }}
+
+        </h2>
+
+        <br>
+
+        <p>
+
+            Thank you for shopping with Capital Autos.
+
+        </p>
+
         <a href="/"
-           class="btn btn-danger mt-4">
+           class="btn btn-danger">
 
             Continue Shopping
 

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ brand.name }} Parts | Capital Autos{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/brands.css' %}">{% endblock %}
+{% block content %}
+<main class="brands-page">
+    <div class="container brands-breadcrumb"><a href="{% url 'home' %}">Home</a><i class="bi bi-chevron-right"></i><a href="{% url 'brands' %}">Brands</a><i class="bi bi-chevron-right"></i><span>{{ brand.name }}</span></div>
+    <section class="container brands-directory">
+        <div class="mb-4"><p class="eyebrow text-danger text-uppercase fw-bold mb-1">Genuine parts</p><h1 class="fw-bold">{{ brand.name }} Parts</h1><p class="text-secondary">Choose your vehicle model to browse available categories.</p></div>
+        <div class="row g-3">
+            {% for model in car_models %}
+            <div class="col-sm-6 col-lg-4"><article class="card h-100 border shadow-sm"><div class="card-body p-4"><h2 class="h5 fw-semibold">{{ model.name }}</h2><a href="{% url 'category_list' model.id %}" class="btn btn-danger mt-2">View Categories <i class="bi bi-arrow-right ms-1"></i></a></div></article></div>
+            {% empty %}<p class="text-secondary">No car models are available for this brand yet.</p>{% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}

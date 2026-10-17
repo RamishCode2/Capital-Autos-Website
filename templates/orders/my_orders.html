@@ -1,0 +1,213 @@
+{% extends "accounts/account_layout.html" %}
+
+{% block account_content %}
+
+<div class="orders-page">
+
+    <!-- Page Header -->
+    <div class="orders-header">
+
+        <h1>My Orders</h1>
+
+        <p>
+            Track, view and manage all your orders in one place.
+        </p>
+
+    </div>
+
+
+    <!-- Order Filters -->
+    <div class="order-tabs">
+
+        <a href="{% url 'my_orders' %}"
+           class="order-tab {% if not selected_status %}active{% endif %}">
+            All Orders
+        </a>
+
+        <a href="?status=Pending"
+           class="order-tab {% if selected_status == 'Pending' %}active{% endif %}">
+            Pending
+        </a>
+
+        <a href="?status=Processing"
+           class="order-tab {% if selected_status == 'Processing' %}active{% endif %}">
+            Processing
+        </a>
+
+        <a href="?status=Shipped"
+           class="order-tab {% if selected_status == 'Shipped' %}active{% endif %}">
+            Shipped
+        </a>
+
+        <a href="?status=Delivered"
+           class="order-tab {% if selected_status == 'Delivered' %}active{% endif %}">
+            Delivered
+        </a>
+
+        <a href="?status=Cancelled"
+           class="order-tab {% if selected_status == 'Cancelled' %}active{% endif %}">
+            Cancelled
+        </a>
+
+    </div>
+
+
+    <!-- =========================
+         ORDERS
+    ========================== -->
+
+    {% if orders %}
+
+        <div class="orders-list">
+
+            {% for order in orders %}
+
+                <div class="order-card">
+
+                    <!-- Order Header -->
+                    <div class="order-card-header">
+
+                        <div>
+
+                            <span class="order-label">
+                                Order
+                            </span>
+
+                            <strong>
+                                #{{ order.order_number }}
+                            </strong>
+
+                        </div>
+
+                        <span class="order-status status-{{ order.status|slugify }}">
+                            {{ order.status }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- Order Date -->
+                    <div class="order-meta">
+
+                        <span>
+                            <i class="bi bi-calendar3"></i>
+
+                            {{ order.created_at|date:"d M Y" }}
+
+                        </span>
+
+                        <span>
+                            <i class="bi bi-credit-card"></i>
+
+                            {{ order.payment_method }}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- Products -->
+                    <div class="order-products">
+
+                        {% for item in order.items.all %}
+
+                            <div class="order-product">
+
+                                <div class="order-product-image">
+
+                                    {% if item.product.image %}
+
+                                        <img src="{{ item.product.image.url }}"
+                                             alt="{{ item.product.name }}">
+
+                                    {% else %}
+
+                                        <div class="order-product-placeholder">
+                                            <i class="bi bi-image"></i>
+                                        </div>
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <div class="order-product-info">
+
+                                    <h5>
+                                        {{ item.product.name }}
+                                    </h5>
+
+                                    <p>
+                                        Quantity:
+                                        {{ item.quantity }}
+                                    </p>
+
+                                </div>
+
+
+                                <div class="order-product-price">
+
+                                    Rs. {{ item.price }}
+
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- Order Footer -->
+                    <div class="order-card-footer">
+
+                        <div>
+
+                            <span>Total</span>
+
+                            <strong>
+                                Rs. {{ order.total_price }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+    {% else %}
+
+        <!-- Empty Orders -->
+        <div class="empty-orders">
+
+            <div class="empty-orders-icon">
+                <i class="bi bi-box-seam"></i>
+            </div>
+
+            <h3>No orders found</h3>
+
+            <p>
+                {% if selected_status %}
+                    You don't have any {{ selected_status|lower }} orders.
+                {% else %}
+                    You haven't placed any orders yet.
+                {% endif %}
+            </p>
+
+            <a href="{% url 'home' %}"
+               class="btn btn-danger">
+                Continue Shopping
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

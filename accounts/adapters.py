@@ -1,6 +1,6 @@
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 
-from .models import UserProfile
+from .models import Profile
 
 
 class CapitalAutosSocialAccountAdapter(DefaultSocialAccountAdapter):
@@ -19,7 +19,7 @@ class CapitalAutosSocialAccountAdapter(DefaultSocialAccountAdapter):
         picture = sociallogin.account.extra_data.get("picture", "")
         if isinstance(picture, dict):
             picture = picture.get("data", {}).get("url", "")
-        profile, _ = UserProfile.objects.get_or_create(user=user)
+        profile, _ = Profile.objects.get_or_create(user=user)
         if picture:
             profile.avatar_url = picture
             profile.save(update_fields=["avatar_url"])

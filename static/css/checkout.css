@@ -1,0 +1,16 @@
+.card{
+    border-radius:15px;
+}
+
+.card-header{
+    font-weight:600;
+}
+
+.form-control,
+.form-select{
+    margin-bottom:15px;
+}
+
+.btn-danger{
+    border-radius:8px;
+}

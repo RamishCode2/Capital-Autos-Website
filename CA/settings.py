@@ -12,9 +12,23 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load local deployment settings without replacing values injected by the host.
+env_file = BASE_DIR / ".env"
+if env_file.is_file():
+    for env_line in env_file.read_text(encoding="utf-8").splitlines():
+        env_line = env_line.strip()
+        if not env_line or env_line.startswith("#") or "=" not in env_line:
+            continue
+        env_name, env_value = env_line.split("=", 1)
+        env_name = env_name.strip()
+        if env_name.lower() == "debug":
+            env_name = "DEBUG"
+        os.environ.setdefault(env_name, env_value.strip().strip('"').strip("'"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,14 +37,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY = "django-insecure-1m(^gjo70h*cgib_hoy7ot5#h%u*yp5j83(mqobl2k=s(&m@(y'"
-
-
 # SECURITY WARNING: don't run with debug turned on in production!
 # Enable Django's development static-file server unless production explicitly
 # sets DEBUG=False in its environment.
 DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
+SECRET_KEY = os.environ.get("SECRET_KEY")
+if not SECRET_KEY:
+    if not DEBUG:
+        raise ImproperlyConfigured("Set SECRET_KEY in the deployment environment.")
+    SECRET_KEY = "django-insecure-local-development-key-change-before-deploying"
+
+def env_flag(name, default=False):
+    return os.environ.get(name, str(default)).lower() == "true"
+
+
+# Cookie security follows the deployment mode; TLS redirection and HSTS remain
+# explicit deployment choices because they depend on the reverse proxy setup.
+SESSION_COOKIE_SECURE = env_flag("SESSION_COOKIE_SECURE", not DEBUG)
+CSRF_COOKIE_SECURE = env_flag("CSRF_COOKIE_SECURE", not DEBUG)
+SECURE_SSL_REDIRECT = env_flag("SECURE_SSL_REDIRECT", False)
+SECURE_HSTS_SECONDS = int(os.environ.get("SECURE_HSTS_SECONDS", "0"))
 
 ALLOWED_HOSTS = [
     ".onrender.com",

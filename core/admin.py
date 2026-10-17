@@ -6,6 +6,7 @@ from .models import (
     PrivacyPolicy,
     ReturnPolicy,
     FAQ,
+    NewsletterSubscriber,
 )
 
 
@@ -63,3 +64,11 @@ class FAQAdmin(admin.ModelAdmin):
     )
 
     search_fields = ("question",)
+
+
+@admin.register(NewsletterSubscriber)
+class NewsletterSubscriberAdmin(admin.ModelAdmin):
+    list_display = ("email", "subscribed_at", "is_active")
+    list_filter = ("is_active", "subscribed_at")
+    search_fields = ("email",)
+    list_editable = ("is_active",)

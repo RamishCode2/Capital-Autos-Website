@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}My Wishlist | Capital Autos{% endblock %}
+{% block content %}
+<main class="container py-5">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div><p class="text-danger text-uppercase fw-bold mb-1">Saved for later</p><h1 class="h2 fw-bold mb-0">My Wishlist</h1></div>
+        <a class="btn btn-outline-dark" href="{% url 'shop' %}">Continue shopping</a>
+    </div>
+    <div class="row">
+        {% for product in products %}
+            {% include "includes/product_card.html" %}
+        {% empty %}
+            <div class="col-12"><div class="alert alert-light border">Your wishlist is empty. Save products you like to find them here.</div></div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

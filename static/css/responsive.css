@@ -1,0 +1,127 @@
+﻿/* Responsive layout helpers */
+
+/* Navbar and header */
+.navbar form {
+    width: auto;
+    max-width: 45%;
+}
+
+.navbar form input {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+@media (max-width: 991.98px) {
+    .custom-navbar {
+        padding: 1rem 0;
+    }
+
+    .navbar .navbar-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .navbar .navbar-nav .nav-item {
+        text-align: center;
+        width: 100%;
+    }
+
+    .navbar form {
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;
+        margin-top: 1rem;
+    }
+
+    .navbar form input,
+    .navbar form button {
+        width: 100%;
+    }
+
+    .cart-nav-button {
+        width: 100%;
+        justify-content: space-between;
+        padding: .85rem 1rem;
+        margin-top: .75rem;
+    }
+
+    .custom-navbar .container {
+        gap: .75rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .custom-navbar .navbar-brand {
+        font-size: 1rem;
+    }
+
+    .custom-navbar .navbar-brand img {
+        height: 38px;
+        width: auto;
+    }
+
+    .user-menu-btn,
+    .cart-nav-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .user-menu-btn {
+        padding: .75rem 1rem;
+    }
+
+    .cart-nav-button {
+        text-align: center;
+    }
+
+    .nav-profile-img {
+        width: 38px;
+        height: 38px;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem, 8vw, 3.5rem);
+    }
+
+    .hero-text {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+
+    .contact-hero {
+        min-height: 420px;
+    }
+
+    .showroom-card {
+        padding: 30px 20px;
+    }
+
+    .showroom-icon {
+        width: 75px;
+        height: 75px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hero-title {
+        font-size: clamp(2rem, 9vw, 2.8rem);
+    }
+
+    .hero-text {
+        font-size: 0.95rem;
+    }
+
+    .navbar form {
+        margin-top: .5rem;
+    }
+
+    .cart-nav-button {
+        padding: .75rem;
+        gap: .5rem;
+    }
+
+    .custom-navbar .navbar-brand {
+        font-size: 0.95rem;
+    }
+}
+

@@ -26,15 +26,21 @@
 
             <div class="mt-3 d-grid gap-2">
 
+                <form method="post" action="{% url 'toggle_wishlist' product.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button type="submit" class="btn btn-outline-danger w-100">Save to Wishlist</button>
+                </form>
+
                 <a href="{% url 'product_detail' product.id %}"
                    class="btn btn-dark">
                     View Details
                 </a>
 
-                <a href="{% url 'add_to_cart' product.id %}"
-   class="btn btn-danger">
-    Add to Cart
-</a>
+                <form method="post" action="{% url 'add_to_cart' product.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger w-100" {% if product.stock <= 0 or product.stock_status != 'in_stock' %}disabled{% endif %}>Add to Cart</button>
+                </form>
 
             </div>
 

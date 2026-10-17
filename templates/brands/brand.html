@@ -1,44 +1,51 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block title %}Car Brands | Capital Autos{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/brands.css' %}">{% endblock %}
 
 {% block content %}
-<section id="brands" class="py-5 bg-light">
-<div class="container mt-5">
-
-    <h2 class="mb-4">
-        {{ brand.name }}
-    </h2>
-
-    <div class="row">
-
-        {% for model in car_models %}
-
-        <div class="col-md-4 mb-3">
-
-            <div class="card shadow-sm">
-
-                <div class="card-body">
-
-                    <h5>{{ model.name }}</h5>
-
-<a href="{% url 'category_list' model.id %}"
-   class="btn btn-primary mt-2">
-   View Categories
-</a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        {% empty %}
-
-        <p>No car models available.</p>
-
-        {% endfor %}
-
+<main class="brands-page">
+    <div class="container brands-breadcrumb">
+        <a href="{% url 'home' %}">Home</a><i class="bi bi-chevron-right"></i><span>Brands</span>
     </div>
 
-</div>
-</section>
+    <section class="brands-hero">
+        <div class="container brands-hero-content">
+            <div class="brands-hero-copy">
+                <p class="eyebrow">Our brands</p>
+                <h1>Car Brands</h1>
+                <p>Explore genuine and quality automotive parts by your favorite brand.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container brands-directory" aria-label="Browse car brands">
+        <div class="brands-grid">
+            {% for brand in brands %}
+            <article class="brand-card">
+                <a class="brand-card-link" href="{% url 'brand_detail' brand.id %}" aria-label="View {{ brand.name }} products">
+                    <div class="brand-mark {% if not brand.logo %}brand-mark-text{% endif %}">
+                        {% if brand.logo %}
+                            <img src="{{ brand.logo.url }}" alt="{{ brand.name }} logo">
+                        {% else %}
+                            <span>{{ brand.name }}</span>
+                        {% endif %}
+                    </div>
+                    <h2>{{ brand.name }}</h2>
+                    <p class="brand-product-count">{{ brand.product_count }} Product{{ brand.product_count|pluralize }}</p>
+                    <span class="btn btn-danger brand-button">View Products <i class="bi bi-arrow-right"></i></span>
+                </a>
+            </article>
+            {% empty %}
+            <div class="brands-empty">
+                <i class="bi bi-car-front"></i>
+                <h2>Brands are on the way</h2>
+                <p>Check back soon to browse parts by vehicle brand.</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="brands-summary">Showing {{ brands|length }} brand{{ brands|length|pluralize }}</div>
+    </section>
+</main>
 {% endblock %}

@@ -29,6 +29,24 @@ class PasswordResetFlowTests(TestCase):
         )
         self.assertEqual(response.status_code, 302)
 
+    def test_login_rejects_external_next_url(self):
+        response = self.client.post(
+            reverse("login") + "?next=https://example.com/",
+            {"email": self.user.email, "password": "OldPassword123"},
+        )
+        self.assertRedirects(response, reverse("home"))
+
+    def test_logout_requires_post(self):
+        self.client.force_login(self.user)
+        self.assertEqual(self.client.get(reverse("logout")).status_code, 405)
+        self.assertRedirects(self.client.post(reverse("logout")), reverse("home"))
+
+    def test_signed_in_navigation_and_profile_pages_render(self):
+        self.client.force_login(self.user)
+        for route_name in ("home", "profile", "my_orders", "wishlist"):
+            with self.subTest(route=route_name):
+                self.assertEqual(self.client.get(reverse(route_name)).status_code, 200)
+
     def test_login_page_renders_without_social_apps(self):
         response = self.client.get(reverse("login"))
         self.assertEqual(response.status_code, 200)

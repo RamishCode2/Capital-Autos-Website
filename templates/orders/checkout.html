@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block title %}Checkout | Capital Autos{% endblock %}
 
 {% block content %}
 
@@ -6,18 +9,19 @@
 
     <div class="row">
 
-        <!-- Customer Information -->
+        <!-- Shipping Form -->
         <div class="col-lg-7">
 
-            <div class="card shadow-sm">
+            <div class="card shadow-sm border-0">
 
                 <div class="card-header bg-dark text-white">
-                    <h4 class="mb-0">Customer Information</h4>
+                    <h4 class="mb-0">Shipping Information</h4>
                 </div>
 
                 <div class="card-body">
 
-                    <form method="post">
+                    <form method="POST">
+
                         {% csrf_token %}
 
                         {{ form.as_p }}
@@ -40,7 +44,11 @@
             <div class="card shadow-sm">
 
                 <div class="card-header bg-danger text-white">
-                    <h4 class="mb-0">Order Summary</h4>
+
+                    <h4 class="mb-0">
+                        Order Summary
+                    </h4>
+
                 </div>
 
                 <div class="card-body">
@@ -50,23 +58,38 @@
                     <div class="d-flex justify-content-between mb-3">
 
                         <div>
-                            <strong>{{ item.product.name }}</strong><br>
-                            Qty: {{ item.quantity }}
+
+                            <strong>
+                                {{ item.product.name }}
+                            </strong>
+
+                            <br>
+
+                            Qty : {{ item.quantity }}
+
                         </div>
 
                         <div>
+
                             Rs. {{ item.subtotal }}
+
                         </div>
 
                     </div>
 
-                    <hr>
-
                     {% endfor %}
 
-                    <h4 class="text-end">
-                        Total: Rs. {{ total }}
-                    </h4>
+                    <hr>
+
+                    <div class="d-flex justify-content-between">
+
+                        <h5>Total</h5>
+
+                        <h5 class="text-danger">
+                            Rs. {{ total }}
+                        </h5>
+
+                    </div>
 
                 </div>
 

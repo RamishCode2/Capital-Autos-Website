@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="account-page">
+
+    <!-- Breadcrumb -->
+    <div class="container">
+        <nav class="account-breadcrumb" aria-label="breadcrumb">
+            <a href="{% url 'home' %}">Home</a>
+            <span>/</span>
+            <span>My Account</span>
+        </nav>
+    </div>
+
+    <div class="container">
+
+        <div class="account-container">
+
+            <!-- =========================
+                 LEFT ACCOUNT SIDEBAR
+            ========================== -->
+            <aside class="account-sidebar">
+
+                <div class="account-sidebar-menu">
+
+                    <!-- My Orders -->
+                    <a href="{% url 'my_orders' %}"
+                       class="account-menu-item {% if request.resolver_match.url_name == 'my_orders' %}active{% endif %}">
+
+                        <span class="account-menu-icon">
+                            <i class="bi bi-box-seam"></i>
+                        </span>
+
+                        <span>My Orders</span>
+
+                    </a>
+
+
+                    <!-- Wishlist -->
+                    <a href="#"
+                       class="account-menu-item">
+
+                        <span class="account-menu-icon">
+                            <i class="bi bi-heart"></i>
+                        </span>
+
+                        <span>Wishlist</span>
+
+                        <span class="account-menu-count">
+                            0
+                        </span>
+
+                    </a>
+
+
+                    <!-- Shopping Cart -->
+                    <a href="{% url 'cart' %}"
+                       class="account-menu-item">
+
+                        <span class="account-menu-icon">
+                            <i class="bi bi-cart3"></i>
+                        </span>
+
+                        <span>Shopping Cart</span>
+
+                        <span class="account-menu-count">
+                            {{ cart_item_count }}
+                        </span>
+
+                    </a>
+
+
+                    <!-- Settings -->
+                    <a href="{% url 'profile' %}"
+                       class="account-menu-item">
+
+                        <span class="account-menu-icon">
+                            <i class="bi bi-gear"></i>
+                        </span>
+
+                        <span>Settings</span>
+
+                    </a>
+
+
+                    <!-- Security -->
+                    <a href="{% url 'password_reset' %}"
+                       class="account-menu-item">
+
+                        <span class="account-menu-icon">
+                            <i class="bi bi-shield-lock"></i>
+                        </span>
+
+                        <span>Security</span>
+
+                    </a>
+
+
+                    <!-- Help Section -->
+                    <div class="account-menu-divider"></div>
+
+                    <div class="account-help-title">
+                        Need Help?
+                    </div>
+
+
+                    <!-- Contact -->
+                    <a href="#"
+                       class="account-menu-item">
+
+                        <span class="account-menu-icon">
+                            <i class="bi bi-headset"></i>
+                        </span>
+
+                        <span>Contact Us</span>
+
+                    </a>
+
+                </div>
+
+            </aside>
+
+
+            <!-- =========================
+                 RIGHT ACCOUNT CONTENT
+            ========================== -->
+            <main class="account-content">
+
+                {% block account_content %}
+                {% endblock %}
+
+            </main>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

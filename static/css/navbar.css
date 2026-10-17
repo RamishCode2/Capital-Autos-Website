@@ -61,3 +61,35 @@
 
 .user-menu-toggle{border-radius:50rem!important;font-size:.85rem;font-weight:600;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .user-dropdown{border-radius:.8rem;font-size:.88rem;min-width:220px;padding:.55rem}.user-dropdown .dropdown-header{color:#6b7280;font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.user-dropdown .dropdown-item{border-radius:.45rem;padding:.6rem .7rem}.user-dropdown .dropdown-item:hover{background:#fff0f0;color:#c62828}
+
+.nav-profile-img{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    object-fit:cover;
+    object-position:center;
+    border:2px solid #fff;
+}
+
+.user-profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.nav-profile-img{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    object-fit:cover;
+    object-position:center;
+    border:2px solid #fff;
+    display:block;
+    flex-shrink:0;
+}
+.dropdown-avatar{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #dc3545;
+}

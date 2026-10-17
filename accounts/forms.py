@@ -2,7 +2,8 @@ from django import forms
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import SetPasswordForm, UserCreationForm
 from django.core.exceptions import ValidationError
-
+from django.contrib.auth.models import User
+from .models import Profile
 
 User = get_user_model()
 
@@ -136,3 +137,31 @@ class PasswordResetSetPasswordForm(SetPasswordForm):
             attrs={"autocomplete": "new-password", "class": "form-control"}
         ),
     )
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ["first_name", "last_name", "email"]
+
+        widgets = {
+            "first_name": forms.TextInput(attrs={"class": "form-control"}),
+            "last_name": forms.TextInput(attrs={"class": "form-control"}),
+            "email": forms.EmailInput(attrs={"class": "form-control"}),
+        }
+
+    def clean_email(self):
+        email = self.cleaned_data["email"].strip()
+        if User.objects.exclude(pk=self.instance.pk).filter(email__iexact=email).exists():
+            raise ValidationError("An account with this email already exists.")
+        return email
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ["image", "phone", "address", "city", "postal_code"]
+
+        widgets = {
+            "phone": forms.TextInput(attrs={"class": "form-control"}),
+            "address": forms.Textarea(attrs={"class": "form-control", "rows": 3}),
+            "city": forms.TextInput(attrs={"class": "form-control"}),
+            "postal_code": forms.TextInput(attrs={"class": "form-control"}),
+        }

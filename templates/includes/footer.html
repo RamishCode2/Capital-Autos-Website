@@ -109,13 +109,13 @@
 
                     <li><a href="/">Home</a></li>
 
-                    <li><a href="#">Brands</a></li>
+                    <li><a href="{% url 'brands' %}">Brands</a></li>
 
-                    <li><a href="#">Categories</a></li>
+                    <li><a href="{% url 'shop' %}">Categories</a></li>
 
-                    <li><a href="#">Products</a></li>
+                    <li><a href="{% url 'shop' %}">Products</a></li>
 
-                    <li><a href="#">Cart</a></li>
+                    <li><a href="{% url 'cart' %}">Cart</a></li>
 
                 </ul>
 
@@ -155,7 +155,7 @@
 
                 <p><i class="fas fa-location-dot"></i> Lahore, Pakistan</p>
 
-                <a href="#" class="btn btn-danger mt-3 w-100">
+                <a href="{% url 'contact' %}" class="btn btn-danger mt-3 w-100">
                     Contact Support
                 </a>
 
@@ -192,14 +192,18 @@
 
             <div class="col-lg-6">
 
-                <form class="newsletter-form">
+                <form class="newsletter-form" method="post" action="{% url 'newsletter_subscribe' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
 
                     <input
                         type="email"
+                        name="email"
                         placeholder="Enter your email address"
+                        required
                         class="form-control">
 
-                    <button class="btn btn-danger">
+                    <button type="submit" class="btn btn-danger">
                         Subscribe
                     </button>
 

@@ -1,73 +1,145 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Profile | Capital Autos{% endblock %}
 
 {% block content %}
-
 <div class="container py-5">
 
-    <h2 class="mb-4">
-        My Account
-    </h2>
+    <div class="row">
 
-    <div class="card shadow">
+        <!-- Sidebar -->
+        <div class="col-lg-3 mb-4">
 
-        <div class="card-body">
+            <div class="card shadow-sm border-0 rounded-4">
 
-            <h4>
-                Welcome, {{ user.username }}
-            </h4>
+                <div class="card-body text-center">
 
-            <p>
-                {{ user.email }}
-            </p>
+                    {% if user.profile.avatar_url %}
+                        <img src="{{ user.profile.avatar_url }}"
+                             class="profile-img rounded-circle mb-3"
+                             alt="{{ user.get_full_name }} profile picture">
+                    {% elif user.profile.image and user.profile.image.name != 'profiles/default.png' %}
+                        <img src="{{ user.profile.image.url }}"
+                             class="profile-img rounded-circle mb-3"
+                             alt="{{ user.get_full_name }} profile picture">
+                    {% else %}
+                        <img src="{% static 'images/avatar.png' %}"
+                             class="profile-img rounded-circle mb-3"
+                             alt="Default profile avatar">
+                    {% endif %}
 
-        </div>
-
-    </div>
-
-    <div class="card shadow mt-4">
-
-        <div class="card-header">
-
-            <h4>
-                My Orders
-            </h4>
-
-        </div>
-
-        <div class="card-body">
-
-            {% for order in orders %}
-
-                <div class="border-bottom py-3">
-
-                    <strong>
-                        Order #{{ order.id }}
-                    </strong>
-
-                    <br>
-
-                    Status:
-                    {{ order.status }}
-
-                    <br>
-
-                    Total:
-                    Rs. {{ order.total }}
+                    <h5>{{ user.get_full_name }}</h5>
+                    <p class="text-muted">{{ user.email }}</p>
 
                 </div>
 
-            {% empty %}
+                <div class="list-group list-group-flush">
 
-                <p>
-                    You haven't placed any orders yet.
-                </p>
+                    <a href="{% url 'profile' %}" class="list-group-item active">
+                        <i class="bi bi-person-circle me-2"></i>
+                        My Profile
+                    </a>
 
-            {% endfor %}
+                    <a href="{% url 'my_orders' %}" class="list-group-item">
+                        <i class="bi bi-box-seam me-2"></i>
+                        My Orders
+                    </a>
+
+                    <a href="{% url 'wishlist' %}" class="list-group-item">
+                        <i class="bi bi-heart me-2"></i>
+                        Wishlist
+                    </a>
+
+                    <a href="#" class="list-group-item">
+                        <i class="bi bi-gear me-2"></i>
+                        Settings
+                    </a>
+
+                    <a href="#" class="list-group-item">
+                        <i class="bi bi-shield-lock me-2"></i>
+                        Security
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Content -->
+        <div class="col-lg-9">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body p-4">
+
+                    <h3 class="mb-4">
+                        Edit Profile
+                    </h3>
+
+                    <form method="POST"
+                          enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+                                <label>First Name</label>
+                                {{ user_form.first_name }}
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>Last Name</label>
+                                {{ user_form.last_name }}
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>Email</label>
+                                {{ user_form.email }}
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>Phone</label>
+                                {{ profile_form.phone }}
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <label>Address</label>
+                                {{ profile_form.address }}
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>City</label>
+                                {{ profile_form.city }}
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>Postal Code</label>
+                                {{ profile_form.postal_code }}
+                            </div>
+
+                            <div class="col-12 mb-4">
+                                <label>Profile Picture</label>
+                                {{ profile_form.image }}
+                            </div>
+
+                        </div>
+
+                        <button class="btn btn-danger px-5">
+                            Save Changes
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
 
 </div>
-
 {% endblock %}

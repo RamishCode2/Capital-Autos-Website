@@ -20,5 +20,6 @@ urlpatterns = [
         views.faq,
         name="faq",
     ),
+    path("newsletter/subscribe/", views.newsletter_subscribe, name="newsletter_subscribe"),
 
 ]
